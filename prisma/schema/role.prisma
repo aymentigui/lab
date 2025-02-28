@@ -1,0 +1,17 @@
+model role {
+  id          String     @id @default(cuid())
+  name        String     @unique(map: "Role_name_key")
+  permissions String
+  users       userrole[]
+}
+
+model userrole {
+  id     String @id @default(cuid())
+  userId String
+  roleId String
+  role   role   @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  user   user   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([roleId], map: "UserRole_roleId_fkey")
+  @@index([userId], map: "UserRole_userId_fkey")
+}

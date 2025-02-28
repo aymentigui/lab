@@ -1,0 +1,20 @@
+model files {
+  id                     String    @id @default(cuid())
+  name                   String
+  extention              String
+  size                   Int
+  addedFrom              String?
+  createdAt              DateTime  @default(now())
+  deletedAt              DateTime?
+  mimeType               String
+  path                   String
+  adminDeleteOnly        Boolean   @default(false)
+  adminDownloadOnly      Boolean   @default(false)
+  adminViewOnly          Boolean   @default(false)
+  canDeletePermissions   String?
+  canDeleteUsers         String?
+  canDownloadPermissions String?
+  canDownloadUsers       String?
+  canViewPermissions     String?
+  canViewUsers           String?
+}

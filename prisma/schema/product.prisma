@@ -1,0 +1,20 @@
+model products {
+  id               String    @id @default(cuid())
+  name             String
+  description      String?
+  image            String?
+  image_compressed String?
+  other_images     String?
+  expiration_date  DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  categories products_categories[] @relation("ProductCategories")
+}
+
+model products_categories {
+  id   String @id @default(cuid())
+  name String
+
+  products products[] @relation("ProductCategories")
+}

@@ -1,0 +1,29 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["prismaSchemaFolder"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id                            String                     @id @default(cuid())
+  firstname                     String?
+  lastname                      String?
+  username                      String?                    @unique(map: "User_username_key")
+  email                         String?                    @unique(map: "User_email_key")
+  emailVerified                 DateTime?
+  password                      String
+  image                         String?
+  isTwoFactorEnabled            Boolean?                   @default(false)
+  createdAt                     DateTime                   @default(now())
+  updatedAt                     DateTime                   @updatedAt
+  isAdmin                       Boolean                    @default(false)
+  imageCompressed               String?
+  resetPasswordConfermationCode resetpasswordconfermation?
+  sessions                      session[]
+  twoFactorConfermationCode     twofactorconfermation?
+  roles                         userrole[]
+}

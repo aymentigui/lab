@@ -1,0 +1,14 @@
+model session {
+  id           String   @id @default(cuid())
+  sessionToken String
+  userId       String
+  expires      DateTime
+  createdAt    DateTime @default(now())
+  browser      String?
+  deviceName   String?
+  deviceType   String?
+  os           String?
+  user         user     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "Session_userId_fkey")
+}
